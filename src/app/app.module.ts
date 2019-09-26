@@ -12,6 +12,8 @@ import {LendBookPage} from "../pages/lend-book/lend-book";
 import {LendCdPage} from "../pages/lend-cd/lend-cd";
 import {TabsPage} from "../pages/tabs/tabs";
 import {SettingsPage} from "../pages/settings/settings";
+import {BooksCdService} from "../services/booksCd.service";
+
 
 @NgModule({
   declarations: [
@@ -42,6 +44,7 @@ import {SettingsPage} from "../pages/settings/settings";
   providers: [
     StatusBar,
     SplashScreen,
+    BooksCdService,
     {provide: ErrorHandler, useClass: IonicErrorHandler}
   ]
 })

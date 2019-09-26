@@ -10,5 +10,14 @@
 </ion-header>
 
 <ion-content padding>
-
+  <ion-list>
+    <button ion-item
+            icon-start
+            *ngFor="let livre of livresList; let i = index"
+            (click)="onClickLivre(i)"
+            [ngClass]="{'is-lend': livre.isLend, 'is-not-lend': !livre.isLend}" >>
+      <ion-icon name="book"></ion-icon>
+      {{ livre.titre }}
+    </button>
+  </ion-list>
 </ion-content>

@@ -4,18 +4,15 @@ import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { MenuController } from 'ionic-angular';
 
-import { HomePage } from '../pages/home/home';
+import {SettingsPage} from "../pages/settings/settings";
 import {TabsPage} from "../pages/tabs/tabs";
-import {BookListPage} from "../pages/book-list/book-list";
-import {CdListPage} from "../pages/cd-list/cd-list";
 
 @Component({
   templateUrl: 'app.html'
 })
 export class MyApp {
-  tabsPage:any = TabsPage;
-  bookListPage: any = BookListPage;
-  cdListPage: any = CdListPage;
+  settingsPage: any = SettingsPage
+  tabsPage: any = TabsPage;
   @ViewChild('content') content: NavController;
 
 
