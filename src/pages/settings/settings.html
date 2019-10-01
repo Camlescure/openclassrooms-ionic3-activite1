@@ -12,5 +12,11 @@ pages and navigation.
 </ion-header>
 
 <ion-content padding>
-  <p>Ceci est la page de réglage.</p>
+    <ion-card>
+      <ion-card-header>Données</ion-card-header>
+      <ion-card-content>
+        <button ion-button block outline (click) = "onSaveInDB()">Enregistrer</button>
+        <button ion-button block outline (click) = "onFetchInDB()">Récupérer</button>
+      </ion-card-content>
+    </ion-card>
 </ion-content>

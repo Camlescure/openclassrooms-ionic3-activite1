@@ -31,7 +31,7 @@ export class MyApp {
         let config = {
           apiKey: "AIzaSyAII_xN-gQGbDrf-RiTvySbqP6p5USFYi8",
           authDomain: "ionic-livresetcd.firebaseapp.com",
-          databaseURL: "https://ionic-livresetcd.firebaseio.com",
+          databaseURL: "https://ionic-livresetcd.firebaseio.com/",
           projectId: "ionic-livresetcd",
           storageBucket: "",
           messagingSenderId: "912964085578"
