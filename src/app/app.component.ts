@@ -6,6 +6,7 @@ import { MenuController } from 'ionic-angular';
 
 import {SettingsPage} from "../pages/settings/settings";
 import {TabsPage} from "../pages/tabs/tabs";
+import { AuthPage } from '../pages/auth/auth';
 
 import * as firebase from 'firebase';
 
@@ -15,8 +16,10 @@ import * as firebase from 'firebase';
 export class MyApp {
   settingsPage: any = SettingsPage
   tabsPage: any = TabsPage;
+  authPage: any = AuthPage;
   @ViewChild('content') content: NavController;
 
+  isAuth: boolean;
 
   constructor(platform: Platform,
     statusBar: StatusBar,
@@ -34,7 +37,7 @@ export class MyApp {
           messagingSenderId: "912964085578"
         };
         firebase.initializeApp(config);
-       /* firebase.auth().onAuthStateChanged(
+        firebase.auth().onAuthStateChanged(
           (user) => {
             if (user) {
               this.isAuth = true;
@@ -44,15 +47,18 @@ export class MyApp {
               this.content.setRoot(AuthPage, {mode: 'connect'});
             }
           }
-        );*/
+        );
       });  
     }
   
+    onDisconnect(){
+      firebase.auth().signOut();
+      this.menuCtrl.close();
+    }
 
-
-  onNavigate(page: any){
-    this.content.setRoot(page);
-    this.menuCtrl.close();
-  }
+    onNavigate(page: any, data?: {}) {
+      this.content.setRoot(page, data ? data : null);
+      this.menuCtrl.close();
+    }
 }
 
