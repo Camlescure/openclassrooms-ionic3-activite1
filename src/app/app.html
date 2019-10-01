@@ -14,11 +14,11 @@
         <ion-icon name="home"></ion-icon>
         Accueil
       </button>
-      <button ion-item icon-start (click)="onNavigate(authPage, {mode: 'new'})">
+      <button ion-item icon-start *ngIf="!isAuth" (click)="onNavigate(authPage, {mode: 'new'})">
         <ion-icon name="person-add"></ion-icon>
         Nouvel utilisateur
       </button>
-      <button ion-item icon-start (click)="onNavigate(authPage, {mode: 'connect'})">
+      <button ion-item icon-start *ngIf="!isAuth" (click)="onNavigate(authPage, {mode: 'connect'})">
         <ion-icon name="person"></ion-icon>
         Connexion
       </button>
