@@ -7,6 +7,8 @@ import { MenuController } from 'ionic-angular';
 import {SettingsPage} from "../pages/settings/settings";
 import {TabsPage} from "../pages/tabs/tabs";
 
+import * as firebase from 'firebase';
+
 @Component({
   templateUrl: 'app.html'
 })
@@ -16,14 +18,37 @@ export class MyApp {
   @ViewChild('content') content: NavController;
 
 
-  constructor(platform: Platform, statusBar: StatusBar, splashScreen: SplashScreen, private menuCtrl: MenuController) {
-    platform.ready().then(() => {
-      // Okay, so the platform is ready and our plugins are available.
-      // Here you can do any higher level native things you might need.
-      statusBar.styleDefault();
-      splashScreen.hide();
-    });
-  }
+  constructor(platform: Platform,
+    statusBar: StatusBar,
+    splashScreen: SplashScreen,
+    private menuCtrl: MenuController) {
+      platform.ready().then(() => {
+        statusBar.styleDefault();
+        splashScreen.hide();
+        let config = {
+          apiKey: "AIzaSyAII_xN-gQGbDrf-RiTvySbqP6p5USFYi8",
+          authDomain: "ionic-livresetcd.firebaseapp.com",
+          databaseURL: "https://ionic-livresetcd.firebaseio.com",
+          projectId: "ionic-livresetcd",
+          storageBucket: "",
+          messagingSenderId: "912964085578"
+        };
+        firebase.initializeApp(config);
+       /* firebase.auth().onAuthStateChanged(
+          (user) => {
+            if (user) {
+              this.isAuth = true;
+              this.content.setRoot(TabsPage);
+            } else {
+              this.isAuth = false;
+              this.content.setRoot(AuthPage, {mode: 'connect'});
+            }
+          }
+        );*/
+      });  
+    }
+  
+
 
   onNavigate(page: any){
     this.content.setRoot(page);
