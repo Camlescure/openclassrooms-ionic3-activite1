@@ -17,7 +17,8 @@
             (click)="onClickCd(i)"
             [ngClass]="{'is-lend': cd.isLend, 'is-not-lend': !cd.isLend}" >
       <ion-icon name="musical-note"></ion-icon>
-      {{ cd.titre }}
+      {{ cd.titre }} 
+      <p *ngIf="cd.isLend">Prêté à {{ cd.lendTo }}</p>
     </button>
   </ion-list>
 </ion-content>

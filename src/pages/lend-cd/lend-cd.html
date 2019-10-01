@@ -5,14 +5,28 @@
       <p>{{ cd.interprete }}</p>
     </ion-card-content>
     <ion-grid>
-      <ion-row>
+      <form [formGroup]='cdForm'>
+      <ion-row *ngIf = "!cd.isLend">
         <ion-col>
+            <ion-label>Nom de l'emprunteur</ion-label>
+            <ion-input type="text" formControlName="nom" style="background-color:rgb(227, 226, 222,0.4)"></ion-input>
+        </ion-col>
+      </ion-row>
+      <ion-row *ngIf = "cd.isLend">
+          <ion-col>
+              <p> Emprunteur: </p>
+              <p> {{ cd.lendTo }}</p>
+          </ion-col>
+        </ion-row>
+      <ion-row>
+        <ion-col>            
           <button
             ion-button
             full
             color="danger"
-            [disabled]="cd.isLend"
+            [disabled]="cd.isLend || cdForm.invalid"
             (click)="onLend()">Prêter</button>
+          
         </ion-col>
         <ion-col>
           <button
@@ -23,6 +37,7 @@
             (click)="onLend()">Récuperer</button>
         </ion-col>
       </ion-row>
+    </form>
     </ion-grid>
   </ion-card>
 </ion-content>

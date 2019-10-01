@@ -13,17 +13,20 @@ export class BooksCdService{
     {
       auteur: 'JK Rowling',
       titre: 'Harry Potter et la chambre des secrets',
-      isLend: false
+      isLend: false, 
+      lendTo: ''
     },
     {
       auteur: 'Stephen King',
       titre: 'Outsider',
-      isLend: true
+      isLend: true, 
+      lendTo: 'Antoine'
     },
     {
       auteur: 'Alexandre Astier',
       titre: 'Kaamelott: Armée du Necromant',
-      isLend: false
+      isLend: false, 
+      lendTo: ''
     }
   ];
 
@@ -31,17 +34,20 @@ export class BooksCdService{
     {
       interprete: 'Nekfeu',
       titre: 'Les étoiles Vagabondes',
-      isLend: true
+      isLend: true, 
+      lendTo: 'Fred'
     },
     {
       interprete: 'Renaud',
       titre: 'Laisse béton',
-      isLend: false
+      isLend: false, 
+      lendTo: ''
     },
     {
       interprete: 'Les Beatles',
       titre: 'Abbey Road',
-      isLend: true
+      isLend: true, 
+      lendTo: 'Roger'
     }
   ];
 
@@ -53,12 +59,14 @@ export class BooksCdService{
     this.cds$.next(this.cdList.slice());
   }
 
-  lendSomething(type: string, index: number){
+  lendSomething(type: string, index: number, nom: string){
     if(type =='cd'){
       this.cdList[index].isLend = !this.cdList[index].isLend;
+      this.cdList[index].lendTo = nom;
     }
     else if(type == 'livre'){
       this.livresList[index].isLend = !this.livresList[index].isLend;
+      this.livresList[index].lendTo = nom;
     }
   }
 

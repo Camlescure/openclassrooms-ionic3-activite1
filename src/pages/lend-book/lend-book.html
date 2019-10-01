@@ -5,24 +5,39 @@
       <p>{{ livre.auteur }}</p>
     </ion-card-content>
     <ion-grid>
-      <ion-row>
-        <ion-col>
-          <button
-            ion-button
-            full
-            color="danger"
-            [disabled]="livre.isLend"
-            (click)="onLend()">Prêter</button>
-        </ion-col>
-        <ion-col>
-          <button
-            ion-button
-            full
-            color="secondary"
-            [disabled]="!livre.isLend"
-            (click)="onLend()">Récuperer</button>
-        </ion-col>
-      </ion-row>
+        <form [formGroup]='bookForm'>
+            <ion-row *ngIf = "!livre.isLend">
+              <ion-col>
+                  <ion-label>Nom de l'emprunteur</ion-label>
+                  <ion-input type="text" formControlName="nom" style="background-color:rgb(227, 226, 222,0.4)"></ion-input>
+              </ion-col>
+            </ion-row>
+            <ion-row *ngIf = "livre.isLend">
+                <ion-col>
+                    <p> Emprunteur: </p>
+                    <p> {{ livre.lendTo }}</p>
+                </ion-col>
+              </ion-row>
+            <ion-row>
+              <ion-col>            
+                <button
+                  ion-button
+                  full
+                  color="danger"
+                  [disabled]="livre.isLend || bookForm.invalid"
+                  (click)="onLend()">Prêter</button>
+                
+              </ion-col>
+              <ion-col>
+                <button
+                  ion-button
+                  full
+                  color="secondary"
+                  [disabled]="!livre.isLend"
+                  (click)="onLend()">Récuperer</button>
+              </ion-col>
+            </ion-row>
+          </form>
     </ion-grid>
   </ion-card>
 </ion-content>

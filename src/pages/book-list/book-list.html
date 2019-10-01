@@ -18,6 +18,7 @@
             [ngClass]="{'is-lend': livre.isLend, 'is-not-lend': !livre.isLend}" >>
       <ion-icon name="book"></ion-icon>
       {{ livre.titre }}
+      <p *ngIf="livre.isLend">Prêté à {{ livre.lendTo }}</p>
     </button>
   </ion-list>
 </ion-content>
