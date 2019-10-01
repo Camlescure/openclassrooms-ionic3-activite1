@@ -26,7 +26,7 @@ export class LendCdPage implements OnInit {
   initForm(){
     this.cdForm = this.formBuilder.group({
       nom: ['', Validators.required]
-    })
+    });
   }
 
   dismissModal(){
@@ -39,6 +39,8 @@ export class LendCdPage implements OnInit {
     } else {
       this.booksCdService.lendSomething('cd', this.index, '');
     }
+    this.booksCdService.saveCDToStorage();
+    this.viewCtrl.dismiss();
   }
 
 

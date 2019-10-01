@@ -24,7 +24,7 @@ export class BookListPage implements OnInit, OnDestroy{
         this.livresList = livres.slice();
       }
     )
-    this.booksCdService.emitLivres();
+    this.booksCdService.fetchLivresFromStorage();
   }
 
   ngOnDestroy(){

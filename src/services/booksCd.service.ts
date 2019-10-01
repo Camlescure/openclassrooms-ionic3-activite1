@@ -3,8 +3,13 @@ import {Cd} from "../models/cd";
 import * as firebase from 'firebase';
 import Datasnapshot = firebase.database.DataSnapshot;
 import { Subject } from "rxjs/Subject";
+import { Injectable } from "@angular/core";
+import { Storage } from '@ionic/storage'
 
+@Injectable()
 export class BooksCdService{
+
+  constructor (public storage: Storage){}
 
   livres$ = new Subject<Book[]>();
   cds$ = new Subject<Cd[]>();
@@ -68,6 +73,37 @@ export class BooksCdService{
       this.livresList[index].isLend = !this.livresList[index].isLend;
       this.livresList[index].lendTo = nom;
     }
+  }
+
+
+  saveLivresToStorage(){
+    this.storage.set('livres', this.livresList);
+  }
+
+  fetchLivresFromStorage(){
+    this.storage.get('livres').then(
+      (list) => {
+        if(list && list.length){
+          this.livresList = list.slice();
+        }
+        this.emitLivres();
+      }
+    );
+  }
+
+  saveCDToStorage(){
+    this.storage.set('cd', this.cdList);
+  }
+
+  fetchCDFromStorage(){
+    this.storage.get('cd').then(
+      (list) => {
+        if(list && list.length){
+          this.cdList = list.slice();
+        }
+        this.emitCd();
+      }
+    );
   }
 
   saveCds(){

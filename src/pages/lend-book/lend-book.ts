@@ -32,7 +32,7 @@ export class LendBookPage implements OnInit {
   }
 
   dismissModal(){
-    this.viewCtrl.dismiss()
+    this.viewCtrl.dismiss();
   }
 
   onLend(){
@@ -41,6 +41,8 @@ export class LendBookPage implements OnInit {
     } else {
       this.booksCdService.lendSomething('livre', this.index, '');
     }
+    this.booksCdService.saveLivresToStorage();
+    this.viewCtrl.dismiss()
   }
 
 

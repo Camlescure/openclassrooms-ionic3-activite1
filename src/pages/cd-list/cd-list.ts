@@ -1,22 +1,29 @@
-import { Component } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import {MenuController, ModalController} from 'ionic-angular';
 import {BooksCdService} from "../../services/booksCd.service";
 import {Cd} from "../../models/cd";
 import {LendCdPage} from "../lend-cd/lend-cd";
+import { Subscription } from 'rxjs/Subscription';
 
 @Component({
   selector: 'page-cd-list',
   templateUrl: 'cd-list.html',
 })
-export class CdListPage {
+export class CdListPage implements OnInit, OnDestroy{
 
   cdList: Cd[];
+  cdSubscription: Subscription;
 
   constructor(private menuCtrl: MenuController, private modalCtrl: ModalController, private booksCdService: BooksCdService) {
   }
 
-  ionViewWillEnter(){
-    this.cdList = this.booksCdService.cdList.slice();
+  ngOnInit(){
+    this.cdSubscription = this.booksCdService.cds$.subscribe(
+      (cds : Cd[]) => {
+        this.cdList = cds.slice();
+      }
+    )
+    this.booksCdService.fetchCDFromStorage();
   }
 
   onClickCd(index: number){
@@ -26,5 +33,9 @@ export class CdListPage {
 
   onToggleMenu(){
     this.menuCtrl.open();
+  }
+
+  ngOnDestroy(){
+    this.cdSubscription.unsubscribe();
   }
 }
